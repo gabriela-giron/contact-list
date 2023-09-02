@@ -1,0 +1,26 @@
+.tabla-info {
+    display: flex;
+    width: 50%;
+    align-items: center;
+}
+
+.tabla-info #contactos{
+    height: 0;
+    transition: .5s;
+}
+
+.tabla-info #contactos thead td:hover,tr:hover {
+    background-color: #91CDF2;
+    color: white;
+    transition: .5s;
+}
+
+.tabla-info #contactos thead tr th {
+    height: 0;
+    text-align: center;
+    padding-right: 2rem;
+}
+
+.tabla-info #contactos tbody tr {
+    border-bottom: 1px solid #ddd;
+}
