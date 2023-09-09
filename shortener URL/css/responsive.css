@@ -1,0 +1,17 @@
+div {
+    width: 100%;
+    height: 1000px;
+    display: flex;
+    justify-content: center;
+    align-content: center;
+}
+
+div section{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-content: center;
+    text-align: center;
+    padding: 1rem;
+    border: 2px solid pink;
+}

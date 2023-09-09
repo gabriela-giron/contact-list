@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/responsive.css">
+    <title>Shortener URL</title>
+</head>
+<body>
+    <div>
+        <section>
+            <h1>Shortener URL</h1>
+            <label for="url-normal">Ingresa el URL</label>
+            <input type="text" id="url-normal" required>
+            <button onclick="logica_fetch()">Shorten</button>
+            <button onclick="logica_refresh()">refresh</button>
+
+            <textarea name="resultado" id="result" cols="30" rows="10"></textarea>
+        </section>
+    </div>
+    
+    
+    <script src="js/api_logica.js"></script>
+
+</body>
+</html>
+
