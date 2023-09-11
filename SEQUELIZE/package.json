@@ -1,0 +1,16 @@
+{
+  "name": "ejm_sequelize",
+  "version": "1.0.0",
+  "description": "ejemplo de conexion a sql server con sequelize y node",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "keren",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.18.2",
+    "sequelize": "^6.33.0",
+    "tedious": "^16.4.0"
+  }
+}
