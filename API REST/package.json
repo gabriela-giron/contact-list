@@ -1,0 +1,19 @@
+{
+  "name": "simple_blog",
+  "version": "1.0.0",
+  "description": "aplicacion de intro a node y express",
+  "main": "(index.js)",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node index.js",
+    "dev": "nodemon index.js"
+  },
+  "author": "Desarrollo Web - A",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.18.2"
+  },
+  "devDependencies": {
+    "nodemon": "^3.0.1"
+  }
+}
