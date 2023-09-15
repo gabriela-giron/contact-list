@@ -1,23 +1,42 @@
-const { Sequelize } = require('sequelize');
+const sequelize = require('./sql/conexion');
 
-// Option 3: Passing parameters separately (other dialects)
-const conn_sql = new Sequelize('BD_WORTSCHATZ', 'keren', '1234', {
-  host: 'localhost',
-  dialect: 'mssql'
+const { Sequelize, DataTypes } = require('sequelize');
+const sequelize_memory = new Sequelize('mssql::memory:');
+
+class wortschatz extends Model {}
+
+wortschatz.init({
+  // Model attributes are defined here
+  artikel: {
+    type: DataTypes.STRING,
+    allowNull: false
+  },
+  wort: {
+    type: DataTypes.STRING,
+    allowNull: false
+  },
+  bedeutung: {
+    type: DataTypes.STRING,
+    allowNull: false
+  },
+  ubersetzung: {
+    type: DataTypes.STRING,
+    allowNull: false
+  },
+  satz: {
+    type: DataTypes.STRING,
+    allowNull: false
+  },
+  bild: {
+    type: DataTypes.BIGINT,
+    allowNull: false
+  }
+}, {
+  // Other model options go here
+  //conection instance
+  sequelize, // We need to pass the connection instance
+  modelName: 'wortschatz'
 });
 
-/* try {
-  await conn_sql.authenticate();
-  console.log('Connection has been established successfully.');
-} catch (error) {
-  console.error('Unable to connect to the database:', error);
-} */
-
-conn_sql
-    .authenticate()
-    .then(() => {
-        console.log("si funciono :3");
-    })
-    .catch((error) => {
-        console.log("hubo un error :s ", error);
-    })
+// `sequelize.define` also returns the model
+console.log(wortschatz === sequelize_memory.models.wortschatz); // true
