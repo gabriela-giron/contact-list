@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pomodoro timer</title>
+</head>
+<body>
+    <div>
+        <h1>Let's be more productive</h1>
+        <p id="timer"></p>
+        <input type="radio" id="minutes" name="time" value="Minutes">
+        <label for="minutes">Minutes</label>
+        <input type="radio" id="seconds" name="time" value="Seconds">
+        <label for="seconds">Seconds</label>
+        <button onclick="add_time()">+</button>
+        <button onclick="minus_time()">-</button>
+        <button onclick="start_count()">start</button>
+        <button onclick="stop_count()">pause</button>
+    </div>
+    <script src="javascript/timer.js"></script>
+</body>
+</html>
