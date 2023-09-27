@@ -18,6 +18,20 @@
         <button onclick="start_count()">start</button>
         <button onclick="stop_count()">pause</button>
         <button onclick="restart_timer()">restart</button>
+
+        <div class="break">
+            <h1>give yourself a break time</h1>
+            <p id="break-time"></p>
+            <input type="radio" id="minutes" name="time-break" value="Minutes">
+            <label for="minutes">Minutes</label>
+            <input type="radio" id="seconds" name="time-break" value="Seconds">
+            <label for="seconds">Seconds</label>
+            <button onclick="add_time()">+</button>
+            <button onclick="minus_time()">-</button>
+            <!-- <button onclick="start_count()">start</button> -->
+            <button onclick="stop_count_break()">pause</button>
+            <button onclick="restart_timer_break()">restart</button>
+        </div>
     </div>
     <script src="javascript/timer.js"></script>
 </body>
