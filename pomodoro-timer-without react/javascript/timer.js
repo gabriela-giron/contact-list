@@ -44,16 +44,18 @@ const minus_time = () => {
             alert('no less time');
         }else{
             minutes = minutes - 1;
+            min_section.textContent = minutes;
             //console.log(minutes);
-            timer(minutes,seconds);
+            //timer(minutes,seconds);
         }
     }else if(time == 'Seconds'){
         if (seconds === 0) {
             alert('no less time');
         }else{
             seconds = seconds - 1;
+            seconds_section.textContent = seconds;
             //console.log(seconds);
-            timer(minutes,seconds);
+            //timer(minutes,seconds);
         }
     }
 }
@@ -94,7 +96,11 @@ timer(minutes,seconds); */
 function start_count() {
     // esto es para saber si ya hay un intervalo o no
     if(!my_internat_id) {
-        my_internat_id = setInterval(count_down, 1000);
+        if (minutes === 0 && seconds === 0){
+            alert('primero coloca el tiempo')
+        }else {
+            my_internat_id = setInterval(count_down, 1000);
+        }
     } else {
         var minutes_count = document.getElementById('minutes');
         minutes_count.innerHTML = minutes;
@@ -160,8 +166,10 @@ function restart_timer(){
     var seconds_count = document.getElementById('seconds');
     seconds_count.innerHTML = 0; */
 
-    min_section.innerHTML = 0;
-    seconds_section.innerHTML = 0;
+    minutes = 0;
+    seconds = 0;
+    min_section.innerText = minutes;
+    seconds_section.innerHTML = seconds;
 
     stop_count();
 }
