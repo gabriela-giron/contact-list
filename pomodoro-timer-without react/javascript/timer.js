@@ -1,13 +1,29 @@
 //var my_internat_id = setInterval(pomodoro,1000);
+//import 'break-time.js';
 
 var minutes = parseInt(0);
 var seconds = parseInt(0);
-var minutes_break = parseInt(0);
-var seconds_break = parseInt(0);
+var intervals = parseInt(0);
 let my_internat_id;
+var separator = document.createElement("span");
+separator.textContent = ':';
+var separator2 = document.createElement("span");
+separator2.textContent = ':';
+
+/* VARIABLES PARA RELOJ PARAMETROS */
+var timer_params = document.getElementById('timer');
+var min_parm = document.createElement("section");
+min_parm.id = 'minutos';
+min_parm.textContent = minutes;
+var secs_parm = document.createElement("section");
+secs_parm.id = 'segundos'; 
+secs_parm.textContent = seconds;
+timer_params.appendChild(min_parm);
+timer_params.appendChild(separator2);
+timer_params.appendChild(secs_parm);
 
 /* VARIABLES PARA RELOJ PRINCIPAL */
-var my_timer = document.getElementById('timer');
+var my_timer = document.getElementById('work-timer');
 var min_section = document.createElement("section");
 min_section.id = 'minutos';
 min_section.textContent = minutes;
@@ -15,52 +31,63 @@ var seconds_section = document.createElement("section");
 seconds_section.id = 'segundos'; 
 seconds_section.textContent = seconds;
 my_timer.appendChild(min_section);
+my_timer.appendChild(separator);
 my_timer.appendChild(seconds_section);
+var minutes_default = minutes;
+var seconds_default = seconds;
 
-/* VARIABLES PARA RELOJ DE BREAK */
-var break_time = document.getElementById('break-time');
-var minb_section = document.createElement("section");
-minb_section.id = 'minutos-break';
-minb_section.textContent = minutes_break;
-var secb_section = document.createElement("section");
-secb_section.id = 'segundos-break'; 
-secb_section.textContent = seconds_break;
-break_time.appendChild(minb_section);
-break_time.appendChild(secb_section);
+const obtener_intervalos = () => {
+    /* recibir intervalos de tiempo */
+    var intervals_parms = document.getElementById('interval');
+    intervals = parseInt(intervals_parms.value);
+    return intervals;
+}
 
 const add_time = () => {
-    var time = validate_radio_buttons();
-    if (minutes >= 30){
-        alert('no more time');
-    }else{
-        if(time == 'Minutes') {
-            minutes = minutes + 1;
-            min_section.textContent = minutes;
-        }else if(time == 'Seconds'){
-            seconds = seconds + 1;
-            if (seconds === 60 ) {
-                seconds = 0;
+    if (my_internat_id) {
+        alert('espera a que se termine el tiempo!');
+    } else {
+        var time = validate_radio_buttons();
+        if (minutes >= 30){
+            alert('no more time');
+        }else{
+            if(time == 'Minutes') {
+                minutes = minutes + 1;
+                min_section.textContent = minutes;
+                min_parm.textContent = minutes;
+            }else if(time == 'Seconds'){
+                seconds = seconds + 1;
+                if (seconds === 60 ) {
+                    seconds = 0;
+                }
+                seconds_section.textContent = seconds;
+                secs_parm.textContent = seconds;
             }
-            seconds_section.textContent = seconds;
         }
     }
 }
 
 const minus_time = () => {
-    var time = validate_radio_buttons();
-    if(time == 'Minutes') {
-        if (minutes === 0) {
-            alert('no less time');
-        }else{
-            minutes = minutes - 1;
-            min_section.textContent = minutes;
-        }
-    }else if(time == 'Seconds'){
-        if (seconds === 0) {
-            alert('no less time');
-        }else{
-            seconds = seconds - 1;
-            seconds_section.textContent = seconds;
+    if(my_internat_id) {
+        alert('espera a que termine el tiempo!')
+    } else {
+        var time = validate_radio_buttons();
+        if(time == 'Minutes') {
+            if (minutes === 0) {
+                alert('no less time');
+            }else{
+                minutes = minutes - 1;
+                min_section.textContent = minutes;
+                min_parm.textContent = minutes;
+            }
+        }else if(time == 'Seconds'){
+            if (seconds === 0) {
+                alert('no less time');
+            }else{
+                seconds = seconds - 1;
+                seconds_section.textContent = seconds;
+                secs_parm.textContent = seconds;
+            }
         }
     }
 }
@@ -80,28 +107,20 @@ const validate_radio_buttons = () => {
     return radio_value;
 }
 
-const validate_break_buttons = () => {
-    var select_break = document.getElementsByName('time-break');
-    var break_value = ''; //stores the result
-
-    for(var i = 0; i < select_break.length; i++){
-        //i debe ser menor al numero de radio buttons
-        if(select_break[i].checked){
-            break_value = select_break[i].value;
-            break;//if its checked, leaves the for
-        } 
-    }
-
-    return break_value;
-}
-
 function start_count() {
     // esto es para saber si ya hay un intervalo o no
     if(!my_internat_id) {
         if (minutes === 0 && seconds === 0){
             alert('primero coloca el tiempo')
         }else {
-            my_internat_id = setInterval(count_down, 1000);
+            
+            console.log(minutes_default);
+            console.log(seconds_default);
+            console.log(intervals);
+
+            min_section.textContent = minutes_default;
+            seconds_section.textContent = seconds_default;
+            start_process();
         }
     } else {
         var minutes_count = document.getElementById('minutes');
@@ -118,15 +137,26 @@ function start_count() {
     }
 }
 
-function start_count_break(){
+function start_process(){
+    //esto no es que sea un perform, sino que corre la tarea como en el background
     my_internat_id = setInterval(count_down, 1000);
-    count_down_break();
+}
+
+function stop_count() {
+    //para terminar el loop
+    if (!my_internat_id) {
+        alert('no hay nada');
+    } else {
+        clearInterval(my_internat_id);
+        alert('se ha pausado el tiempo');
+        my_internat_id = null;
+    }
 }
 
 function count_down() {
     if(seconds === 0 && minutes === 0) {
         clearInterval(my_internat_id);
-        alert('Empieza el descanso!')
+        console.log('Empieza el descanso!');
         my_internat_id = null;
         start_count_break();
     }else if(seconds === 0 && minutes >= 1) {
@@ -143,17 +173,6 @@ function count_down() {
     seconds_section.innerHTML = seconds;
 }
 
-function stop_count() {
-    //para terminar el loop
-    if (!my_internat_id) {
-        alert('no hay nada');
-    } else {
-        clearInterval(my_internat_id);
-        alert('se ha pausado el tiempo');
-        my_internat_id = null;
-    }
-}
-
 function restart_timer(){
     minutes = 0;
     seconds = 0;
@@ -163,21 +182,3 @@ function restart_timer(){
     stop_count();
 }
 
-function count_down_break(){
-    if(seconds_break === 0 && minutes_break === 0) {
-        clearInterval(my_internat_id);
-        alert('Termina el descanso!')
-        my_internat_id = null;
-    }else if(seconds_break === 0 && minutes_break >= 1) {
-        minutes_break = minutes_break - 1;
-        seconds_break = 60;
-        seconds_break = seconds_break - 1;
-    }else if(minutes_break === 0 && seconds_break >= 1){
-        minutes_break = 0;
-        seconds_break = seconds_break - 1;
-    } else {
-        seconds_break = seconds_break - 1;
-    }
-    min_section.innerText = minutes_break;
-    seconds_section.innerHTML = seconds_break;
-}
