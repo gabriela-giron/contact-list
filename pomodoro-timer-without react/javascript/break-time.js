@@ -1,10 +1,15 @@
-/* VARIABLES PARA RELOJ DE BREAK */
+/* VARIABLES PARA RELOJ BREAK */
 var minutes_break = parseInt(0);
 var seconds_break = parseInt(0);
+var minutes_param = parseInt(0);
+var seconds_param = parseInt(0);
 var loop_times = parseInt(0);
+var separator4 = document.createElement("span");
+separator4.textContent = ':';
 
 let break_internat_id;
 
+/* variables para tiempo de descanso */
 var break_time = document.getElementById('break-time');
 var minb_section = document.createElement("section");
 minb_section.id = 'minutos-break';
@@ -13,7 +18,20 @@ var secb_section = document.createElement("section");
 secb_section.id = 'segundos-break'; 
 secb_section.textContent = seconds_break;
 break_time.appendChild(minb_section);
+break_time.appendChild(separator4);
 break_time.appendChild(secb_section);
+
+/* variables de descanso para los intervalos */
+var break_params = document.getElementById('break-params');
+var minp_section = document.createElement("section");
+minp_section.id = 'minutos-break-parm';
+minp_section.textContent = minutes_break;
+var secp_section = document.createElement("section");
+secp_section.id = 'segundos-break-parm'; 
+secp_section.textContent = seconds_break;
+break_params.appendChild(minp_section);
+break_params.appendChild(separator2);
+break_params.appendChild(secp_section);
 
 const validate_break_buttons = () => {
     var select_break = document.getElementsByName('time-break');
@@ -38,16 +56,20 @@ const add_break = () => {
         if (minutes_break >= 30){
             alert('no more time');
         }else{
-            if(time == 'M') {
-                console.log('minutos ', time)
+            if(time == 'MP') {
                 minutes_break = minutes_break + 1;
+                minutes_param = minutes_param + 1;
                 minb_section.textContent = minutes_break;
-            }else if(time == 'S'){
+                minp_section.textContent = minutes_break;
+            }else if(time == 'SP'){
                 seconds_break = seconds_break + 1;
+                seconds_param = seconds_param + 1;
                 if (seconds_break === 60 ) {
                     seconds_break = 0;
+                    seconds_param = 0;
                 }
                 secb_section.textContent = seconds_break;
+                secp_section.textContent = seconds_break;
             }
         }
     }
@@ -58,23 +80,26 @@ const minus_break = () => {
         alert('espera hasta que se termine el tiempo!');
     } else {
         var time = validate_break_buttons();
-        if(time == 'M') {
+        if(time == 'MP') {
             if (minutes_break === 0) {
                 alert('no less time');
             }else{
                 minutes_break = minutes_break - 1;
+                minutes_param = minutes_param - 1;
                 minb_section.textContent = minutes_break;
+                minp_section.textContent = minutes_break;
             }
-        }else if(time == 'Seconds'){
+        }else if(time == 'SP'){
             if (seconds_break === 0) {
                 alert('no less time');
             }else{
                 seconds_break = seconds_break - 1;
+                seconds_param = seconds_param - 1;
                 secb_section.textContent = seconds_break;
+                secp_section.textContent = seconds_break;
             }
         }
     }
-    
 }
 
 function start_count_break(){
@@ -86,14 +111,21 @@ function count_down_break(){
         clearInterval(break_internat_id);
         alert('Termina el descanso!')
         break_internat_id = null;
+        console.log(intervals);
         if (intervals > 0){
-            min_section.textContent = minutes_default;
-            seconds_section.textContent = seconds_default;
-            start_process()
             intervals--;
+            minutes = minutes_default;
+            seconds = seconds_default;
+            minutes_break = minutes_param;
+            seconds_break = seconds_param;
+            start_count();
         }else {
             min_section.textContent = 0;
             seconds_section.textContent = 0;
+            minutes = minutes_default;
+            seconds = seconds_default;
+            minutes_break = minutes_param;
+            seconds_break = seconds_param;
             alert('fin de los ciclos!')
         }
     }else if(seconds_break === 0 && minutes_break >= 1) {
