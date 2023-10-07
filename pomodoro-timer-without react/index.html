@@ -3,36 +3,67 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/styles.css">
     <title>Pomodoro timer</title>
 </head>
 <body>
     <div>
-        <h1>Let's be more productive</h1>
-        <p id="timer"></p>
-        <input type="radio" id="minutes" name="time" value="Minutes">
-        <label for="minutes">Minutes</label>
-        <input type="radio" id="seconds" name="time" value="Seconds">
-        <label for="seconds">Seconds</label>
-        <button onclick="add_time()">+</button>
-        <button onclick="minus_time()">-</button>
-        <button onclick="start_count()">start</button>
-        <button onclick="stop_count()">pause</button>
-        <button onclick="restart_timer()">restart</button>
+        <button id="show-modal">Parameters</button>
+        <div id="parms_modal" class="modal">
+            <div class="modal-content">
+                <span class="close-modal">&times;</span>
+                <label for="intervals">Set your work intervals</label>
+                <input type="number" name="intervals" id='interval' required>
+                <button onclick="obtener_intervalos()">Agregar</button>
+                <section class="time-parms">
+                    <p id="timer"></p>
+                    <input type="radio" id="minutes" name="time" value="Minutes">
+                    <label for="minutes">Minutes</label>
+                    <input type="radio" id="seconds" name="time" value="Seconds">
+                    <label for="seconds">Seconds</label>
+                    <button onclick="add_time()">+</button>
+                    <button onclick="minus_time()">-</button>
+                </section>
+                <section class="break-parms">
+                    <h3>tiempo de descanso</h3>
+                    <input type="radio" id="minutes" name="time-break" value="M">
+                    <label for="minutes">Minutes</label>
+                    <input type="radio" id="seconds" name="time-break" value="S">
+                    <label for="seconds">Seconds</label>
+                    <button onclick="add_break()">+</button>
+                    <button onclick="minus_break()">-</button>
+                </section>
+            </div>
+        </div>
+        <div class="productive">
+            <h1>Let's be more productive</h1>
+            <p id="work-timer"></p>
+            <!-- <input type="radio" id="minutes" name="time" value="Minutes">
+            <label for="minutes">Minutes</label>
+            <input type="radio" id="seconds" name="time" value="Seconds">
+            <label for="seconds">Seconds</label>
+            <button onclick="add_time()">+</button>
+            <button onclick="minus_time()">-</button> -->
+            <button onclick="start_count()">start</button>
+            <button onclick="stop_count()">pause</button>
+            <button onclick="restart_timer()">restart</button>
+        </div>
 
         <div class="break">
             <h1>give yourself a break time</h1>
             <p id="break-time"></p>
-            <input type="radio" id="minutes" name="time-break" value="Minutes">
+            <!-- <input type="radio" id="minutes" name="time-break" value="M">
             <label for="minutes">Minutes</label>
-            <input type="radio" id="seconds" name="time-break" value="Seconds">
+            <input type="radio" id="seconds" name="time-break" value="S">
             <label for="seconds">Seconds</label>
-            <button onclick="add_time()">+</button>
-            <button onclick="minus_time()">-</button>
+            <button onclick="add_break()">+</button>
+            <button onclick="minus_break()">-</button> -->
             <!-- <button onclick="start_count()">start</button> -->
-            <button onclick="stop_count_break()">pause</button>
-            <button onclick="restart_timer_break()">restart</button>
+            <!-- <button onclick="stop_count_break()">pause</button> -->
         </div>
     </div>
+    <script src="javascript/modal_logic.js"></script>
     <script src="javascript/timer.js"></script>
+    <script src="javascript/break-time.js"></script>
 </body>
 </html>
