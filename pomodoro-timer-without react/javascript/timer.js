@@ -9,6 +9,8 @@ var separator = document.createElement("span");
 separator.textContent = ':';
 var separator2 = document.createElement("span");
 separator2.textContent = ':';
+var separator3 = document.createElement("span");
+separator3.textContent = ':';
 
 /* VARIABLES PARA RELOJ PARAMETROS */
 var timer_params = document.getElementById('timer');
@@ -19,7 +21,7 @@ var secs_parm = document.createElement("section");
 secs_parm.id = 'segundos'; 
 secs_parm.textContent = seconds;
 timer_params.appendChild(min_parm);
-timer_params.appendChild(separator2);
+timer_params.appendChild(separator3);
 timer_params.appendChild(secs_parm);
 
 /* VARIABLES PARA RELOJ PRINCIPAL */
@@ -40,6 +42,7 @@ const obtener_intervalos = () => {
     /* recibir intervalos de tiempo */
     var intervals_parms = document.getElementById('interval');
     intervals = parseInt(intervals_parms.value);
+    console.log('intervals ', intervals);
     return intervals;
 }
 
@@ -53,12 +56,15 @@ const add_time = () => {
         }else{
             if(time == 'Minutes') {
                 minutes = minutes + 1;
+                minutes_default = minutes_default + 1;
                 min_section.textContent = minutes;
                 min_parm.textContent = minutes;
             }else if(time == 'Seconds'){
                 seconds = seconds + 1;
+                seconds_default = seconds_default + 1;
                 if (seconds === 60 ) {
                     seconds = 0;
+                    seconds_default = 0;
                 }
                 seconds_section.textContent = seconds;
                 secs_parm.textContent = seconds;
@@ -77,6 +83,7 @@ const minus_time = () => {
                 alert('no less time');
             }else{
                 minutes = minutes - 1;
+                minutes_default = minutes_default - 1;
                 min_section.textContent = minutes;
                 min_parm.textContent = minutes;
             }
@@ -85,6 +92,7 @@ const minus_time = () => {
                 alert('no less time');
             }else{
                 seconds = seconds - 1;
+                minutes_default = minutes_default - 1;
                 seconds_section.textContent = seconds;
                 secs_parm.textContent = seconds;
             }
@@ -116,10 +124,10 @@ function start_count() {
             
             console.log(minutes_default);
             console.log(seconds_default);
+            console.log(minutes_param);
+            console.log(seconds_param);
             console.log(intervals);
 
-            min_section.textContent = minutes_default;
-            seconds_section.textContent = seconds_default;
             start_process();
         }
     } else {
