@@ -1,8 +1,6 @@
-#work-timer {
-    display: flex;
-}
 
-#timer {
+
+#work-timer, #timer, #break-time, #break-params {
     display: flex;
 }
 
@@ -35,3 +33,4 @@
     padding: 10px;
     cursor: pointer;
 }
+
